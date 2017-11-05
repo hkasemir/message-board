@@ -7,9 +7,18 @@
 }
 
 .home-link {
-  color: white;
   margin: 0;
   font-weight: 300;
+}
+
+.nav-links {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links:hover {
+  color: #ddd;
 }
 
 .nav-links-ul {
@@ -18,9 +27,5 @@
   margin: 0;
   display: flex;
   font-weight: 100;
-}
-
-.nav-links {
-  margin: 0 1rem;
 }
 
