@@ -1,11 +1,16 @@
 import types from '../actions/types';
+import {normalizePosts} from '../helpers/reducer-helper';
 
-const initialState = [];
+export const postsInitialState = {
+  all: [],
+  byAuthor: {},
+  byCategory: {}
+};
 
-export default function posts(state=initialState, action) {
+export default function posts(state=postsInitialState, action) {
   switch (action.type) {
     case types.FETCH_POSTS_COMPLETED:
-      return action.payload;
+      return normalizePosts(action.payload);
 
     default:
       return state;

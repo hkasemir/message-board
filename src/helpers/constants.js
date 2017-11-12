@@ -1,3 +1,11 @@
 export const ORDER_POSTS = {
-  byVoteScore: 'byVoteScore'
+  byVoteScore: 'voteScore',
+  byAuthor: 'author',
+  byTimestamp: 'timestamp'
+};
+
+export const FILTER_POSTS = {
+  all: 'all',
+  byAuthor: 'byAuthor',
+  byCategory: 'byCategory'
 };

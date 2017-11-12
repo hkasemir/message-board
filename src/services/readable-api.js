@@ -15,7 +15,6 @@ export default {
   },
   async fetchPosts() {
     const posts = await get('/posts');
-    console.log(posts)
     return posts;
   }
 };
