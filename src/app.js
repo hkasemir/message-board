@@ -4,8 +4,8 @@ import {
   Switch, Route
 } from 'react-router-dom';
 import MainHeader    from './components/main-header';
+import CategorySidebar from './components/category-sidebar';
 import Home          from './views/home';
-import Categories    from './views/categories';
 import store from './store';
 import './app.css';
 
@@ -14,10 +14,13 @@ const App = () => {
     <Provider store={store}>
       <div>
         <MainHeader />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/categories' component={Categories} />
-        </Switch>
+        <main>
+          <CategorySidebar />
+          <Switch>
+            <Route path='/' component={Home} />
+            <Route path='/category/:categoryPath' component={Home} />
+          </Switch>
+        </main>
       </div>
     </Provider>
   );

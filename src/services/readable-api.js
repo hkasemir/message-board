@@ -12,5 +12,10 @@ export default {
   async fetchCategories() {
     const {categories} = await get('/categories');
     return categories;
+  },
+  async fetchPosts() {
+    const posts = await get('/posts');
+    console.log(posts)
+    return posts;
   }
 };

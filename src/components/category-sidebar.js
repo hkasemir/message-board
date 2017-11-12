@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import actions from '../actions';
 
-class Categories extends Component {
+class CategorySidebar extends PureComponent {
   componentDidMount() {
     this.props.fetchCategories();
   }
@@ -10,16 +11,17 @@ class Categories extends Component {
   render() {
     const {categories} = this.props;
     return (
-      <section>
-        <p>categories</p>
+      <nav>
         <ul>
         {
           categories.map(
-            cat => <li key={cat.path}>{cat.name}</li>
+          cat => <li key={cat.path}>
+              <Link to={`/category/${cat.path}`}>{cat.name}</Link>
+            </li>
           )
         }
         </ul>
-      </section>
+      </nav>
     );
   }
 }
@@ -32,6 +34,4 @@ const mapDispatchToProps = {
   fetchCategories: actions.fetchCategories
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(CategorySidebar);
