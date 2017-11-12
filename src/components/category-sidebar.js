@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import {connect} from 'react-redux';
 import actions from '../actions';
+import './category-sidebar.css';
 
-class CategorySidebar extends PureComponent {
+class CategorySidebar extends Component {
   componentDidMount() {
     this.props.fetchCategories();
   }
@@ -11,12 +12,17 @@ class CategorySidebar extends PureComponent {
   render() {
     const {categories} = this.props;
     return (
-      <nav>
+      <nav className='side-nav'>
         <ul>
         {
           categories.map(
           cat => <li key={cat.path}>
-              <Link to={`/category/${cat.path}`}>{cat.name}</Link>
+            <NavLink
+              to={`/category/${cat.path}`}
+              activeClassName='category-link--active'
+              className='category-link'>
+              {cat.name}
+            </NavLink>
             </li>
           )
         }
@@ -34,4 +40,4 @@ const mapDispatchToProps = {
   fetchCategories: actions.fetchCategories
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategorySidebar);
+export default connect(mapStateToProps, mapDispatchToProps, null, {pure:false})(CategorySidebar);

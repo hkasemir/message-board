@@ -5,20 +5,20 @@ import {
 } from 'react-router-dom';
 import MainHeader    from './components/main-header';
 import CategorySidebar from './components/category-sidebar';
-import Home          from './views/home';
+import Main          from './views/main';
 import store from './store';
 import './app.css';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>
+      <div className='page-content'>
         <MainHeader />
-        <main>
+        <main className='main-container'>
           <CategorySidebar />
           <Switch>
-            <Route path='/' component={Home} />
-            <Route path='/category/:categoryPath' component={Home} />
+            <Route path='/' component={Main} />
+            <Route path='/category/:categoryPath' component={Main} />
           </Switch>
         </main>
       </div>

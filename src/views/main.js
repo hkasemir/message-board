@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PostsList from '../components/posts-list';
 import actions from '../actions';
 import {ORDER_POSTS} from '../helpers/constants';
+import './main.css';
 
 
 class Home extends Component {

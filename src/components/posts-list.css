@@ -1,0 +1,39 @@
+.post-list-ul {
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-li {
+  padding: 1em;
+}
+
+.post-li:nth-child(2n) {
+  background-color: #e1eefb;
+}
+
+.downvotes,
+.upvotes {
+  color: #666;
+  width: 4em;
+  display: inline-block;
+  text-align: center;
+  margin-right: 1em;
+}
+
+.downvotes {
+  color: #a70707;
+}
+
+.post-author {
+  color: #5B90C8;
+  margin-left: 1em;
+}
+
+.post-date {
+  margin-left: 1em;
+  color: #666;
+  font-style: italic;
+}
+

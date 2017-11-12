@@ -1,0 +1,20 @@
+.side-nav ul {
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #eee;
+}
+
+.category-link {
+  color: #2d4865;
+  display: block;
+  padding: 1em 2em;
+  text-decoration: none;
+}
+
+.category-link--active,
+.category-link:hover {
+  color: black;
+  background-color: #ddd;
+}
