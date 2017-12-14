@@ -8,6 +8,12 @@ export default {
       readableApi.fetchPosts,
       types.FETCH_POSTS_COMPLETED
     )();
+  },
+  addNew(action) {
+    return createSaga(
+      readableApi.addNewPost,
+      types.ADD_NEW_POST_COMPLETED
+    )(action.payload);
   }
 }
 

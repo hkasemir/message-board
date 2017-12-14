@@ -7,5 +7,8 @@ export default {
   },
   fetchPosts() {
     return createAction(types.FETCH_POSTS);
+  },
+  addNewPost(post) {
+    return createAction(types.ADD_NEW_POST, post);
   }
 };

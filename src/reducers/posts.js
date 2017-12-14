@@ -12,6 +12,10 @@ export default function posts(state=postsInitialState, action) {
     case types.FETCH_POSTS_COMPLETED:
       return normalizePosts(action.payload);
 
+    case types.ADD_NEW_POST_COMPLETED:
+      const newPostList = [...state.all, action.payload];
+      return normalizePosts(newPostList);
+
     default:
       return state;
   }

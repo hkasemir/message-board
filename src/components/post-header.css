@@ -1,0 +1,30 @@
+.post-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px dashed #ccc;
+}
+
+.title {
+  display: inline-block;
+}
+
+.button--add-post {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.button--toggle-order {
+  width: 5rem;
+  margin-left: 1rem;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.descending {
+  display: inline-block;
+  transform: rotate(180deg);
+}

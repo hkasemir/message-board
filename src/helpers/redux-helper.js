@@ -7,9 +7,9 @@ export function createAction(type, payload) {
   };
 }
 
-export function createSaga(asyncFn, type) {
+export function createSaga(asyncFn, completedActionType) {
   return function* (fnArgs) {
     const payload = yield call(asyncFn, fnArgs);
-    yield put(createAction(type, payload));
+    yield put(createAction(completedActionType, payload));
   };
 }

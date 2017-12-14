@@ -17,7 +17,7 @@ const App = () => {
         <main className='main-container'>
           <CategorySidebar />
           <Switch>
-            <Route path='/' component={Main} />
+            <Route exact path='/' component={Main} />
             <Route path='/category/:categoryPath' component={Main} />
           </Switch>
         </main>
