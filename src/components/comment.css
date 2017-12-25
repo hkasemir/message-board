@@ -1,0 +1,16 @@
+.comment-li {
+  padding: 1em 0;
+}
+
+.comment-li:nth-child(2n) {
+  background-color: #e1eefb;
+}
+
+.comment-body {
+  margin-right: 1em;
+}
+
+.comment-info {
+  font-style: italic;
+  color: #aaa;
+}

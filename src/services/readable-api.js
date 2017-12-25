@@ -33,5 +33,9 @@ export default {
   async addNewPost(postForm) {
     const newPost = post('/posts', postForm);
     return newPost;
+  },
+  async fetchPostComments(postId) {
+    const comments = await get(`/posts/${postId}/comments`);
+    return comments;
   }
 };

@@ -8,6 +8,9 @@ export default {
   fetchPosts() {
     return createAction(types.FETCH_POSTS);
   },
+  fetchPostComments(postId) {
+    return createAction(types.FETCH_POST_COMMENTS, postId);
+  },
   addNewPost(post) {
     return createAction(types.ADD_NEW_POST, post);
   }

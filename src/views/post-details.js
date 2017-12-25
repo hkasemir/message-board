@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import Comment from '../components/comment';
 import actions from '../actions';
 import './post-details.css';
 
 export class PostDetails extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    const {fetchPosts, fetchComments, match: {params: {postId}}} = this.props;
+    fetchPosts();
+    fetchComments(postId);
   }
 
   render() {
-    const {post} = this.props
+    const {post, comments} = this.props
     return (
       <section className='post-details-container'>
         <h1>{_.get(post, 'title', 'Post Not Found')}</h1>
@@ -20,6 +23,11 @@ export class PostDetails extends Component {
             <p>{post.voteScore} points in {post.category}</p>
             <p>{post.body}</p>
             <h3>Comments</h3>
+            <ol className='comment-list-container'>
+              {_.map(comments, comment => (
+                <Comment comment={comment} />
+              ))}
+            </ol>
           </div>
         )}
       </section>
@@ -28,11 +36,13 @@ export class PostDetails extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  post: _.find(_.get(state, 'posts.all'), {id: props.match.params.postId})
+  post: _.find(_.get(state, 'posts.all'), {id: props.match.params.postId}),
+  comments: _.get(state, ['comments', props.match.params.postId])
 });
 
 const mapDispatchToProps = {
-  fetchPosts: actions.fetchPosts
+  fetchPosts: actions.fetchPosts,
+  fetchComments: actions.fetchPostComments
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
