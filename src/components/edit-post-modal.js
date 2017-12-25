@@ -4,7 +4,9 @@ import _ from 'lodash';
 import generateUUID from 'uuid/v1';
 import actions from '../actions';
 import Modal from 'react-modal';
+import Select from 'react-select';
 import './edit-post-modal.css';
+import 'react-select/dist/react-select.css';
 Modal.setAppElement('#root');
 
 function getDefaultState(props) {
@@ -15,6 +17,13 @@ function getDefaultState(props) {
     category: _.get(props.post, 'category', props.category)
   };
 }
+
+const getSelectOptions = (categories) => {
+  return _.map(categories, category => ({
+    label: _.capitalize(category.name),
+    value: category.path
+  }));
+};
 
 class EditPostModal extends Component {
   constructor(props) {
@@ -31,6 +40,10 @@ class EditPostModal extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleUpdateCategory = (option) => {
+    this.setState({category: option.value});
   }
 
   handleSubmitEdits = () => {
@@ -58,7 +71,8 @@ class EditPostModal extends Component {
   render() {
     const {
       isOpen,
-      onClose
+      onClose,
+      categories
     } = this.props;
     const {
       title,
@@ -70,41 +84,51 @@ class EditPostModal extends Component {
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}>
-        <input
-          type='text'
-          name='title'
-          placeholder='Title'
-          value={title}
-          onChange={this.handleUpdateText}
-        />
-        <input
-          type='text'
-          name='author'
-          placeholder='Author'
-          value={author}
-          onChange={this.handleUpdateText}
-        />
-        <input
-          type='text'
-          name='category'
-          placeholder='Category'
-          value={category}
-          onChange={this.handleUpdateText}
-        />
-        <textarea
-          name='body'
-          placeholder='Body'
-          value={body}
-          onChange={this.handleUpdateText}
-        />
-        <input type='submit' value='add new post' onClick={this.handleSubmitEdits} />
+        <div className='modal-contents-container'>
+          <input
+            type='text'
+            name='title'
+            className='title-input'
+            placeholder='Title'
+            value={title}
+            onChange={this.handleUpdateText}
+          />
+          <input
+            type='text'
+            className='author-input'
+            name='author'
+            placeholder='Author'
+            value={author}
+            onChange={this.handleUpdateText}
+          />
+          <Select
+            className='select-container'
+            placeholder='Category'
+            options={getSelectOptions(categories)}
+            value={category}
+            onChange={this.handleUpdateCategory}
+            clearable={false}
+          />
+          <textarea
+            name='body'
+            placeholder='Body'
+            className='body-input'
+            value={body}
+            onChange={this.handleUpdateText}
+          />
+          <input type='submit' value='add new post' onClick={this.handleSubmitEdits} />
+        </div>
       </Modal>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  categories: state.categories
+});
+
 const mapDispatchToProps = {
   addNewPost: actions.addNewPost
 };
 
-export default connect(null, mapDispatchToProps)(EditPostModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostModal);

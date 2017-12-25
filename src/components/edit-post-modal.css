@@ -1,0 +1,30 @@
+.modal-contents-container {
+  padding: 2em 4em;
+}
+
+.select-container {
+  width: 50%;
+}
+
+.title-input {
+  display: block;
+  font-size: 2em;
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.25em;
+}
+
+.author-input {
+  padding: 0.25em;
+  width: 50%;
+  margin-bottom: 1em;
+}
+
+.body-input {
+  width: 100%;
+  margin: 1em 0;
+  font-size: 1.2em;
+  padding: 0.25em;
+  height: 6em;
+  resize: vertical;
+}

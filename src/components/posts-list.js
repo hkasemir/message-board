@@ -43,7 +43,7 @@ class PostsList extends Component {
               <span className={post.voteScore >= 0 ? 'upvotes' : 'downvotes'}>{post.voteScore}</span>
               {post.title}
               <span className='post-author'>({post.author})</span>
-              <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)}</span>
+              <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)} in {post.category}</span>
             </li>
             )}
           </ul>
