@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import _ from 'lodash';
 import PostHeader from './post-header';
 import {ORDER_POSTS} from '../helpers/constants';
@@ -41,7 +42,7 @@ class PostsList extends Component {
           {
             showPosts.map(post => <li key={post.id} className='post-li'>
               <span className={post.voteScore >= 0 ? 'upvotes' : 'downvotes'}>{post.voteScore}</span>
-              {post.title}
+              <Link to={`/posts/${post.id}`}>{post.title}</Link>
               <span className='post-author'>({post.author})</span>
               <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)} in {post.category}</span>
             </li>
