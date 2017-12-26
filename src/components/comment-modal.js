@@ -9,8 +9,8 @@ Modal.setAppElement('#root');
 
 function getDefaultState(props) {
   return {
-    body: _.get(props.post, 'body', ''),
-    author: _.get(props.post, 'author', '')
+    body: _.get(props, 'comment.body', ''),
+    author: _.get(props, 'comment.author', '')
   };
 }
 
@@ -37,9 +37,15 @@ class CommentModal extends Component {
       author
     } = this.state;
 
-    const {addComment, editComment, onClose, comment, postId} = this.props;
+    const {addComment, editComment, onClose, postId, comment} = this.props;
     if (comment) {
-      return editComment()
+      const newComment = {
+        ...comment,
+        timestamp: Date.now(),
+        body
+      };
+      editComment(newComment);
+      return onClose();
     }
 
     addComment({
@@ -56,7 +62,8 @@ class CommentModal extends Component {
   render() {
     const {
       isOpen,
-      onClose
+      onClose,
+      comment
     } = this.props;
     const {
       body,
@@ -69,6 +76,7 @@ class CommentModal extends Component {
         <div className='modal-contents-container'>
           <input
             type='text'
+            disabled={!_.isEmpty(comment)}
             className='author-input'
             name='author'
             placeholder='Author'

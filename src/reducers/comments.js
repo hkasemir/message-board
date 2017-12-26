@@ -1,23 +1,41 @@
 import _ from 'lodash';
+import {
+  mapEdits
+} from '../helpers/reducer-helper';
 import types from '../actions/types';
 
 export const commentsInitialState = {};
 
 export default function comments(state=commentsInitialState, action) {
   const {payload, type, args} = action;
+  let parentId;
   switch (type) {
     case types.FETCH_POST_COMMENTS_COMPLETED:
-      const postId = args;
+      parentId = args;
       return {
         ...state,
-        [postId]: payload
+        [parentId]: payload
       };
 
     case types.ADD_NEW_COMMENT_COMPLETED:
-      const {parentId} = payload;
+      parentId = payload.parentId;
       return {
         ...state,
         [parentId]: [...state[parentId], payload]
+      };
+
+    case types.EDIT_COMMENT_COMPLETED:
+      parentId = payload.parentId;
+      return {
+        ...state,
+        [parentId]: mapEdits(state[parentId], payload)
+      };
+
+    case types.DELETE_COMMENT_COMPLETED:
+      parentId = payload.parentId;
+      return {
+        ...state,
+        [parentId]: state[parentId].filter(comment => comment.id !== payload.id)
       };
 
     case types.DELETE_POST_COMPLETED:

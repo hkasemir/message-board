@@ -22,5 +22,11 @@ export default {
   },
   addComment(commentForm) {
     return createAction(types.ADD_NEW_COMMENT, commentForm);
+  },
+  deleteComment(comment) {
+    return createAction(types.DELETE_COMMENT, comment);
+  },
+  editComment(commentForm) {
+    return createAction(types.EDIT_COMMENT, commentForm);
   }
 };

@@ -17,3 +17,12 @@ export function normalizePosts(posts) {
     return state;
   }, _.cloneDeep(postsInitialState));
 }
+
+export function mapEdits(itemArray, editedItem) {
+  return _.map(itemArray, item => {
+    if (item.id === editedItem.id) {
+      return editedItem;
+    }
+    return item;
+  });
+}

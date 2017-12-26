@@ -1,5 +1,8 @@
 import types from '../actions/types';
-import {normalizePosts} from '../helpers/reducer-helper';
+import {
+  normalizePosts,
+  mapEdits
+} from '../helpers/reducer-helper';
 
 export const postsInitialState = {
   all: [],
@@ -23,12 +26,7 @@ export default function posts(state=postsInitialState, action) {
       return normalizePosts(newPostList);
 
     case types.EDIT_POST_COMPLETED:
-      newPostList = state.all.map(post => {
-        if (post.id === payload.id) {
-          return payload;
-        }
-        return post;
-      });
+      newPostList = mapEdits(state.all, payload);
       return normalizePosts(newPostList);
 
     default:

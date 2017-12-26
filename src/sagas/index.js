@@ -12,4 +12,6 @@ export function* rootSaga() {
   yield takeEvery(types.DELETE_POST, posts.deletePost);
   yield takeEvery(types.FETCH_POST_COMMENTS, comments.fetchPostComments);
   yield takeEvery(types.ADD_NEW_COMMENT, comments.addComment);
+  yield takeEvery(types.EDIT_COMMENT, comments.editComment);
+  yield takeEvery(types.DELETE_COMMENT, comments.deleteComment);
 }

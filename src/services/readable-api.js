@@ -71,5 +71,15 @@ export default {
   async addComment(commentForm) {
     const newComment = await post('/comments', commentForm);
     return newComment;
+  },
+  async editComment(edited) {
+    const {id, timestamp, body} = edited;
+    const editForm = {timestamp, body};
+    await put(`/comments/${id}`, editForm);
+    return edited;
+  },
+  async deleteComment(comment) {
+    await deleteRequest(`/comments/${comment.id}`);
+    return comment;
   }
 };

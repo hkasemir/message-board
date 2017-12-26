@@ -15,6 +15,18 @@ export default {
       types.ADD_NEW_COMMENT_COMPLETED
     )(action.payload);
   },
+  editComment(action) {
+    return createSaga(
+      readableApi.editComment,
+      types.EDIT_COMMENT_COMPLETED
+    )(action.payload);
+  },
+  deleteComment(action) {
+    return createSaga(
+      readableApi.deleteComment,
+      types.DELETE_COMMENT_COMPLETED
+    )(action.payload);
+  },
 }
 
 
