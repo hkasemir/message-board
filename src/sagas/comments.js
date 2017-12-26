@@ -8,7 +8,13 @@ export default {
       readableApi.fetchPostComments,
       types.FETCH_POST_COMMENTS_COMPLETED
     )(action.payload);
-  }
+  },
+  addComment(action) {
+    return createSaga(
+      readableApi.addComment,
+      types.ADD_NEW_COMMENT_COMPLETED
+    )(action.payload);
+  },
 }
 
 

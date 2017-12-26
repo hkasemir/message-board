@@ -8,5 +8,8 @@ export function* rootSaga() {
   yield takeLatest(types.FETCH_CATEGORIES, categories.fetchAll);
   yield takeLatest(types.FETCH_POSTS, posts.fetchAll);
   yield takeEvery(types.ADD_NEW_POST, posts.addNew);
+  yield takeEvery(types.EDIT_POST, posts.editPost);
+  yield takeEvery(types.DELETE_POST, posts.deletePost);
   yield takeEvery(types.FETCH_POST_COMMENTS, comments.fetchPostComments);
+  yield takeEvery(types.ADD_NEW_COMMENT, comments.addComment);
 }

@@ -54,7 +54,11 @@ class EditPostModal extends Component {
       category
     } = this.state;
 
-    const {addNewPost, onClose} = this.props;
+    const {addNewPost, editPost, onClose, post} = this.props;
+    if (post) {
+      editPost({...post, title, body});
+      return onClose();
+    }
 
     addNewPost({
       id: generateUUID(),
@@ -72,7 +76,8 @@ class EditPostModal extends Component {
     const {
       isOpen,
       onClose,
-      categories
+      categories,
+      post
     } = this.props;
     const {
       title,
@@ -97,6 +102,7 @@ class EditPostModal extends Component {
             type='text'
             className='author-input'
             name='author'
+            disabled={!_.isEmpty(post)}
             placeholder='Author'
             value={author}
             onChange={this.handleUpdateText}
@@ -104,6 +110,7 @@ class EditPostModal extends Component {
           <Select
             className='select-container'
             placeholder='Category'
+            disabled={!_.isEmpty(post)}
             options={getSelectOptions(categories)}
             value={category}
             onChange={this.handleUpdateCategory}
@@ -116,7 +123,7 @@ class EditPostModal extends Component {
             value={body}
             onChange={this.handleUpdateText}
           />
-          <input type='submit' value='add new post' onClick={this.handleSubmitEdits} />
+          <input type='submit' value='submit' onClick={this.handleSubmitEdits} />
         </div>
       </Modal>
     );
@@ -128,7 +135,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  addNewPost: actions.addNewPost
+  addNewPost: actions.addNewPost,
+  editPost: actions.editPost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPostModal);

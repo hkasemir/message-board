@@ -14,7 +14,19 @@ export default {
       readableApi.addNewPost,
       types.ADD_NEW_POST_COMPLETED
     )(action.payload);
-  }
+  },
+  editPost(action) {
+    return createSaga(
+      readableApi.editPost,
+      types.EDIT_POST_COMPLETED
+    )(action.payload);
+  },
+  deletePost(action) {
+    return createSaga(
+      readableApi.deletePost,
+      types.DELETE_POST_COMPLETED
+    )(action.payload);
+  },
 }
 
 

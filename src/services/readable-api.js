@@ -21,6 +21,26 @@ async function post(url, data) {
   return result.json();
 }
 
+async function put(url, data) {
+  const result = await fetch(SERVER_URI + url, {
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    method: 'put',
+    body: JSON.stringify(data)
+  });
+  return result.json();
+}
+
+async function deleteRequest(url) {
+  const result = await fetch(SERVER_URI + url, {
+    headers,
+    method: 'delete'
+  });
+  return result.json();
+}
+
 export default {
   async fetchCategories() {
     const {categories} = await get('/categories');
@@ -31,11 +51,25 @@ export default {
     return posts;
   },
   async addNewPost(postForm) {
-    const newPost = post('/posts', postForm);
+    const newPost = await post('/posts', postForm);
     return newPost;
+  },
+  async editPost(edited) {
+    const {id, title, body} = edited;
+    const editForm = {title, body};
+    await put(`/posts/${id}`, editForm);
+    return edited;
+  },
+  async deletePost(postId) {
+    await deleteRequest(`/posts/${postId}`);
+    return postId;
   },
   async fetchPostComments(postId) {
     const comments = await get(`/posts/${postId}/comments`);
     return comments;
+  },
+  async addComment(commentForm) {
+    const newComment = await post('/comments', commentForm);
+    return newComment;
   }
 };

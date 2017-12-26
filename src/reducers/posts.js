@@ -8,12 +8,27 @@ export const postsInitialState = {
 };
 
 export default function posts(state=postsInitialState, action) {
-  switch (action.type) {
+  const {type, payload} = action;
+  let newPostList;
+  switch (type) {
     case types.FETCH_POSTS_COMPLETED:
-      return normalizePosts(action.payload);
+      return normalizePosts(payload);
 
     case types.ADD_NEW_POST_COMPLETED:
-      const newPostList = [...state.all, action.payload];
+      newPostList = [...state.all, payload];
+      return normalizePosts(newPostList);
+
+    case types.DELETE_POST_COMPLETED:
+      newPostList = state.all.filter(post => post.id !== payload);
+      return normalizePosts(newPostList);
+
+    case types.EDIT_POST_COMPLETED:
+      newPostList = state.all.map(post => {
+        if (post.id === payload.id) {
+          return payload;
+        }
+        return post;
+      });
       return normalizePosts(newPostList);
 
     default:
