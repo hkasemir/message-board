@@ -24,6 +24,7 @@ export default function comments(state=commentsInitialState, action) {
         [parentId]: [...state[parentId], payload]
       };
 
+    case types.VOTE_ON_COMMENT_COMPLETED:
     case types.EDIT_COMMENT_COMPLETED:
       parentId = payload.parentId;
       return {

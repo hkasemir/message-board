@@ -23,6 +23,15 @@ class PostsList extends Component {
     }
   }
 
+  vote = (evt, post) => {
+    const {onVote} = this.props;
+    const voteForm = {
+      postId: post.id,
+      option: evt.target.name
+    };
+    onVote(voteForm);
+  }
+
   render() {
     const {posts, category} = this.props;
     const {orderBy, ascending} = this.state;
@@ -40,13 +49,20 @@ class PostsList extends Component {
         />
         <ul className='post-list-ul'>
           {
-            showPosts.map(post => <li key={post.id} className='post-li'>
-              <span className={post.voteScore >= 0 ? 'upvotes' : 'downvotes'}>{post.voteScore}</span>
-              <Link to={`/posts/${post.id}`}>{post.title}</Link>
-              <span className='post-author'>({post.author})</span>
-              <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)} in {post.category}</span>
-            </li>
-            )}
+            showPosts.map(post => {
+              const handleVote = (evt) => this.vote(evt, post);
+              return (
+                <li key={post.id} className='post-li'>
+                  <button name='upVote' onClick={handleVote}>+</button>
+                  <span className={post.voteScore >= 0 ? 'upvotes' : 'downvotes'}>{post.voteScore}</span>
+                  <button name='downVote' onClick={handleVote}>-</button>
+                  <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                  <span className='post-author'>({post.author})</span>
+                  <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)} in {post.category}</span>
+                </li>
+              );
+            })
+          }
           </ul>
         </section>
     );

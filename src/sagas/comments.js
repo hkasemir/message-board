@@ -21,6 +21,12 @@ export default {
       types.EDIT_COMMENT_COMPLETED
     )(action.payload);
   },
+  vote(action) {
+    return createSaga(
+      readableApi.voteOnComment,
+      types.VOTE_ON_COMMENT_COMPLETED
+    )(action.payload);
+  },
   deleteComment(action) {
     return createSaga(
       readableApi.deleteComment,

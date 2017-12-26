@@ -26,6 +26,15 @@ export class PostDetails extends Component {
     deletePost(post.id);
   }
 
+  handleVote = (evt) => {
+    const {post, voteOnPost} = this.props;
+    const voteForm = {
+      postId: post.id,
+      option: evt.target.name
+    };
+    voteOnPost(voteForm);
+  }
+
   render() {
     const {post, comments} = this.props
     const {isEditModalOpen, isCommentModalOpen, isDeleteModalOpen} = this.state;
@@ -38,7 +47,11 @@ export class PostDetails extends Component {
               <button onClick={() => this.setState({isEditModalOpen: true})}>edit post</button>
               <button onClick={() => this.setState({isDeleteModalOpen: true})}>delete post</button>
           </p>
-            <p>{post.voteScore} points in {post.category}</p>
+          <p>
+            <button name='upVote' onClick={this.handleVote}>+</button>
+            {post.voteScore}
+            <button name='downVote' onClick={this.handleVote}>-</button>
+            points in {post.category}</p>
             <p>{post.body}</p>
             <h3>Comments <button onClick={() => this.setState({isCommentModalOpen: true})}>+ Add Comment</button></h3>
             <ol className='comment-list-container'>
@@ -77,7 +90,8 @@ const mapDispatchToProps = {
   fetchPosts: actions.fetchPosts,
   fetchComments: actions.fetchPostComments,
   addComment: actions.addComment,
-  deletePost: actions.deletePost
-}
+  deletePost: actions.deletePost,
+  voteOnPost: actions.voteOnPost
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

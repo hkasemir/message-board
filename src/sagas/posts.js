@@ -21,6 +21,12 @@ export default {
       types.EDIT_POST_COMPLETED
     )(action.payload);
   },
+  vote(action) {
+    return createSaga(
+      readableApi.voteOnPost,
+      types.VOTE_ON_POST_COMPLETED
+    )(action.payload);
+  },
   deletePost(action) {
     return createSaga(
       readableApi.deletePost,

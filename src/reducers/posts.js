@@ -25,6 +25,7 @@ export default function posts(state=postsInitialState, action) {
       newPostList = state.all.filter(post => post.id !== payload);
       return normalizePosts(newPostList);
 
+    case types.VOTE_ON_POST_COMPLETED:
     case types.EDIT_POST_COMPLETED:
       newPostList = mapEdits(state.all, payload);
       return normalizePosts(newPostList);

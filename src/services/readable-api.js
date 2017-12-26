@@ -54,6 +54,11 @@ export default {
     const newPost = await post('/posts', postForm);
     return newPost;
   },
+  async voteOnPost(voteForm) {
+    const {option} = voteForm;
+    const newPost = await post(`/posts/${voteForm.postId}`, {option});
+    return newPost;
+  },
   async editPost(edited) {
     const {id, title, body} = edited;
     const editForm = {title, body};
@@ -70,6 +75,11 @@ export default {
   },
   async addComment(commentForm) {
     const newComment = await post('/comments', commentForm);
+    return newComment;
+  },
+  async voteOnComment(voteForm) {
+    const {option} = voteForm;
+    const newComment = await post(`/comments/${voteForm.commentId}`, {option});
     return newComment;
   },
   async editComment(edited) {

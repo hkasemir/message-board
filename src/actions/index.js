@@ -11,6 +11,9 @@ export default {
   addNewPost(post) {
     return createAction(types.ADD_NEW_POST, post);
   },
+  voteOnPost(voteForm) {
+    return createAction(types.VOTE_ON_POST, voteForm);
+  },
   editPost(post) {
     return createAction(types.EDIT_POST, post);
   },
@@ -22,6 +25,9 @@ export default {
   },
   addComment(commentForm) {
     return createAction(types.ADD_NEW_COMMENT, commentForm);
+  },
+  voteOnComment(voteForm) {
+    return createAction(types.VOTE_ON_COMMENT, voteForm);
   },
   deleteComment(comment) {
     return createAction(types.DELETE_COMMENT, comment);
