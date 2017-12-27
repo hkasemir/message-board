@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import _ from 'lodash';
 import PostHeader from './post-header';
+import PostsListItem from './post-list-item';
 import {ORDER_POSTS} from '../helpers/constants';
 import './posts-list.css';
 
@@ -23,17 +23,8 @@ class PostsList extends Component {
     }
   }
 
-  vote = (evt, post) => {
-    const {onVote} = this.props;
-    const voteForm = {
-      postId: post.id,
-      option: evt.target.name
-    };
-    onVote(voteForm);
-  }
-
   render() {
-    const {posts, category} = this.props;
+    const {posts, category, onVote, onDelete} = this.props;
     const {orderBy, ascending} = this.state;
     const filteredPosts = category ? posts.byCategory[category] : posts.all;
 
@@ -48,23 +39,14 @@ class PostsList extends Component {
           orderBy={orderBy}
         />
         <ul className='post-list-ul'>
-          {
-            showPosts.map(post => {
-              const handleVote = (evt) => this.vote(evt, post);
-              return (
-                <li key={post.id} className='post-li'>
-                  <button name='upVote' onClick={handleVote}>+</button>
-                  <span className={post.voteScore >= 0 ? 'upvotes' : 'downvotes'}>{post.voteScore}</span>
-                  <button name='downVote' onClick={handleVote}>-</button>
-                  <Link to={`/posts/${post.id}`}>{post.title}</Link>
-                  <span className='post-author'>({post.author})</span>
-                  <span className='post-date'>Posted {(new Intl.DateTimeFormat('en-US', {month: 'long', day: 'numeric', year: 'numeric'})).format(post.timestamp)} in {post.category}</span>
-                </li>
-              );
-            })
-          }
-          </ul>
-        </section>
+          {showPosts.map(post => <PostsListItem
+            key={post.id}
+            post={post}
+            onVote={onVote}
+            onDelete={onDelete}
+          />)}
+        </ul>
+      </section>
     );
   }
 }

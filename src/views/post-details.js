@@ -53,7 +53,7 @@ export class PostDetails extends Component {
             <button name='downVote' onClick={this.handleVote}>-</button>
             points in {post.category}</p>
             <p>{post.body}</p>
-            <h3>Comments <button onClick={() => this.setState({isCommentModalOpen: true})}>+ Add Comment</button></h3>
+            <h3>{post.commentCount} Comments <button onClick={() => this.setState({isCommentModalOpen: true})}>+ Add Comment</button></h3>
             <ol className='comment-list-container'>
               {_.map(comments, comment => (
                 <Comment key={comment.id} comment={comment} />

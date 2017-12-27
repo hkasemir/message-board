@@ -16,11 +16,13 @@ class Home extends Component {
       match: {
         params
       },
-      voteOnPost
+      voteOnPost,
+      deletePost
     } = this.props;
     return (
       <PostsList
         onVote={voteOnPost}
+        onDelete={deletePost}
         posts={posts}
         category={params.categoryPath}
       />
@@ -29,12 +31,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts,
 });
 
 const mapDispatchToProps = {
   fetchPosts: actions.fetchPosts,
-  voteOnPost: actions.voteOnPost
-}
+  voteOnPost: actions.voteOnPost,
+  deletePost: actions.deletePost
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -19,8 +19,8 @@ const App = () => {
           <CategorySidebar />
           <Switch>
             <Route exact path='/' component={Main} />
-            <Route path='/category/:categoryPath' component={Main} />
-            <Route path='/posts/:postId' component={PostDetails} />
+            <Route exact path='/:categoryPath' component={Main} />
+            <Route path='/:categoryPath/:postId' component={PostDetails} />
           </Switch>
         </main>
       </div>

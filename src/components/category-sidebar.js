@@ -18,7 +18,7 @@ class CategorySidebar extends Component {
           categories.map(
           cat => <li key={cat.path}>
             <NavLink
-              to={`/category/${cat.path}`}
+              to={`/${cat.path}`}
               activeClassName='category-link--active'
               className='category-link'>
               {cat.name}
